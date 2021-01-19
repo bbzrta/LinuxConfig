@@ -26,7 +26,7 @@ set_themes () {
 # Downloading Alacritty on Arch based systems using pacman.
 set_terminal_arch () {
 	sudo pacman -Sy alacritty zsh
-	mv dotconfig/alacritty.yml ~/.config
+	cp dotconfig/alacritty.yml ~/.config
 	chsh "$USER" -s /bin/zsh
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 	echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
@@ -38,7 +38,7 @@ set_terminal_arch () {
 }
 set_terminal_debian (){
 	sudo apt install alacritty zsh
-	mv dotconfig/alacritty.yml ~/.config
+	cp dotconfig/alacritty.yml ~/.config
 	chsh "$USER" -s /bin/zsh
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.Terminal/powerlevel10k
 	echo 'source ~/.Terminal/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
@@ -49,7 +49,7 @@ set_terminal_debian (){
 }
 set_terminal_fedora (){
 	sudo dnf install alacritty zsh
-	mv dotconfig/alacritty.yml ~/.config
+	cp dotconfig/alacritty.yml ~/.config
 	chsh "$USER" -s /bin/zsh
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 	echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
