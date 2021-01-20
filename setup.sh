@@ -24,41 +24,13 @@ set_themes () {
 }
 
 # Downloading Alacritty on Arch based systems using pacman.
-set_terminal_arch () {
-	sudo pacman -Sy alacritty zsh
+set_terminal () {
 	cp dotconfig/alacritty.yml ~/.config
 	chsh "$USER" -s /bin/zsh
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-	echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-	mkdir ~/.Terminal
-	cd ~/.Terminal
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-	echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
-	source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-}
-set_terminal_debian (){
-	sudo apt install alacritty zsh
-	cp dotconfig/alacritty.yml ~/.config
-	chsh "$USER" -s /bin/zsh
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.Terminal/powerlevel10k
-	echo 'source ~/.Terminal/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-	mkdir ~/.Terminal
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.Terminal/zsh-syntax-highlighting
-	echo "source ~/.Terminal/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
-	source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-}
-set_terminal_fedora (){
-	sudo dnf install alacritty zsh
-	cp dotconfig/alacritty.yml ~/.config
-	chsh "$USER" -s /bin/zsh
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-	echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-	mkdir .Terminal
-	cd .Terminal
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
-	echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> $
-{ZDOTDIR:-$HOME}/.zshrc
-	source ./zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git .terminal
+	echo "source ${(q-)PWD}/.terminal/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
+	source ./.terminal/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 }
 
 # Installing all the needed packages
@@ -105,20 +77,7 @@ while true ; do
 
 	if [[ $task -eq 2 ]]
 	then
-		if [[ $osname -eq 1 ]]
-		then
-			set_terminal_arch
-		fi
-
-		if [[ $osname -eq 2 ]]
-		then
-			set_terminal_debian
-		fi
-
-		if [[ $osname -eq 3 ]]
-		then
-			set_terminal_fedora
-		fi
+		set_terminal
 	fi
 	
 	if [[ $task -eq 3 ]]
