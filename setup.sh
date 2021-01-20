@@ -27,10 +27,13 @@ set_themes () {
 set_terminal () {
 	cp dotconfig/alacritty.yml ~/.config
 	chsh "$USER" -s /bin/zsh
+	mkdir ~/.terminal
+	
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git .terminal
-	echo "source ${(q-)PWD}/.terminal/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
-	source ./.terminal/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+	
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 }
 
 # Installing all the needed packages
@@ -59,7 +62,7 @@ folder_structure
 
 while true ; do
 	clear
-
+ZSH_THEME="powerlevel9k/powerlevel9k"
 	echo "1.Themes"
 	echo "2.Terminal"
 	echo "3.Software"
@@ -78,6 +81,13 @@ while true ; do
 	if [[ $task -eq 2 ]]
 	then
 		set_terminal
+		clear
+		echo YOU NEED TO ACTIVATE THE SYNTAX HIGHLIGHTING BY ADDING 'plugins=( [plugins...] zsh-syntax-highlighting)' to .ZSHRC
+		read
+		clear
+		echo YOU NEED TO ACTIVATE POWERLEVEL10K BY ADDING 'powerlevel10k/powerlevel10k' IN FRONT OF 'ZSH_THEME='
+		read
+
 	fi
 	
 	if [[ $task -eq 3 ]]
