@@ -67,7 +67,7 @@ clear
 folder_structure
 
 while true ; do
-	read
+	sleep 3
 	clear
 ZSH_THEME="powerlevel9k/powerlevel9k"
 	echo "1.Themes"
@@ -78,7 +78,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 	echo "9.Quit and reboot."
 	echo "What do you want to start with:"
 	read -r task
-	read
+	sleep 3
 	clear
 
 	if [[ $task -eq 1 ]]
@@ -89,13 +89,13 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 	if [[ $task -eq 2 ]]
 	then
 		set_terminal
-		read
+		sleep 3
 		clear
 		echo YOU NEED TO ACTIVATE THE SYNTAX HIGHLIGHTING BY ADDING 'plugins=( [plugins...] zsh-syntax-highlighting)' to .ZSHRC
-		read
+		sleep 5
 		clear
 		echo YOU NEED TO ACTIVATE POWERLEVEL10K BY ADDING 'powerlevel10k/powerlevel10k' IN FRONT OF 'ZSH_THEME='
-		read
+		sleep 5
 
 	fi
 	
