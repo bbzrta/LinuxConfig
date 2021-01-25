@@ -10,13 +10,8 @@ folder_structure () {
 
 # Setting the shell and icon theme in place
 set_themes () {
-	wget "https://dllb2.pling.com/api/files/download/id/1581918005/s/67e16051c2ab09ba262689b163ec038579f2f2f743fa8e91
-	a4e31a5ae2a35af63ba53a0740424787f07f81645993743c5725f9563856e24cb8fdfa93f4bd26aa/t/1610761826/u/322444/Orchis-com
-	pact.tar.xz" -P ~/temp/
-	
-	tar -xf ~/temp/Orchis-compact.tar.xz -C ~/.themes
-	rm -rf ~/temp/*
-	
+	unzip themes.zip -f ~/.themes/
+
 	wget "https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/master.tar.gz" -P ~/temp/
 	tar -xf ~/temp/master.tar.gz -C ~/temp/
 	mv ./*Papirus* ~/.icons/
@@ -34,10 +29,13 @@ set_terminal () {
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+	cp ./.zshrc ~/
 }
 
 # Installing all the needed packages
 install_packages_arch(){
+	
 	xargs -a software.txt sudo pacman -S 
 }
 install_packages_debian(){
@@ -49,6 +47,7 @@ install_packages_fedora(){
 
 install_fonts(){
 	cp ./fonts/* ~/.fonts
+	sudo cp ./fonts/ /usr/share/fonts/TTF
 }
 ##########################################################
 clear
@@ -61,6 +60,7 @@ clear
 folder_structure
 
 while true ; do
+	read
 	clear
 ZSH_THEME="powerlevel9k/powerlevel9k"
 	echo "1.Themes"
@@ -71,6 +71,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 	echo "9.Quit and reboot."
 	echo "What do you want to start with:"
 	read -r task
+	read
 	clear
 
 	if [[ $task -eq 1 ]]
@@ -81,6 +82,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 	if [[ $task -eq 2 ]]
 	then
 		set_terminal
+		read
 		clear
 		echo YOU NEED TO ACTIVATE THE SYNTAX HIGHLIGHTING BY ADDING 'plugins=( [plugins...] zsh-syntax-highlighting)' to .ZSHRC
 		read
