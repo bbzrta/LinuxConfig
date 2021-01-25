@@ -1,4 +1,11 @@
 #!/bin/bash
+#by Arsham Rezaei
+#
+#
+
+
+
+
 # Functions
 
 # Creating the needed folder structure for -per user- configurations.
