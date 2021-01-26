@@ -27,7 +27,8 @@ set_themes () {
 
 # Downloading Alacritty on Arch based systems using pacman.
 set_terminal () {
-	cp dotconfig/alacritty.yml ~/.config
+	mkdir ~/.config/alacritty 
+	cp dotconfig/alacritty.yml ~/.config/alacritty/
 	chsh "$USER" -s /bin/zsh
 	mkdir ~/.terminal
 	
@@ -53,7 +54,7 @@ install_packages_fedora(){
 }
 
 install_fonts(){
-	cp ./fonts/* ~/.fonts
+	
 	sudo cp ./fonts/ /usr/share/fonts/TTF
 }
 ##########################################################
