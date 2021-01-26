@@ -4,8 +4,6 @@
 #
 
 
-
-
 # Functions
 
 # Creating the needed folder structure for -per user- configurations.
@@ -17,8 +15,7 @@ folder_structure () {
 
 # Setting the shell and icon theme in place
 set_themes () {
-	unzip themes.zip -f ~/.themes/
-
+	unzip themes.zip -d ~/.themes/
 	wget "https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/master.tar.gz" -P ~/temp/
 	tar -xf ~/temp/master.tar.gz -C ~/temp/
 	mv ./*Papirus* ~/.icons/
@@ -34,9 +31,9 @@ set_terminal () {
 	
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 
 	cp ./.zshrc ~/
 }
@@ -54,8 +51,8 @@ install_packages_fedora(){
 }
 
 install_fonts(){
-	
-	sudo cp ./fonts/ /usr/share/fonts/TTF
+	unzip ./fonts.zip -d ~/.fonts/
+
 }
 ##########################################################
 clear
@@ -68,7 +65,7 @@ clear
 folder_structure
 
 while true ; do
-	sleep 3
+	sleep 1
 	clear
 	echo "1.Themes"
 	echo "2.Terminal"
@@ -78,7 +75,7 @@ while true ; do
 	echo "9.Quit and reboot."
 	echo "What do you want to start with:"
 	read -r task
-	sleep 3
+	sleep 1
 	clear
 
 	if [[ $task -eq 1 ]]
@@ -94,7 +91,7 @@ while true ; do
 		echo YOU NEED TO ACTIVATE THE SYNTAX HIGHLIGHTING BY ADDING 'plugins=( [plugins...] zsh-syntax-highlighting)' to .ZSHRC
 		sleep 5
 		clear
-		echo YOU NEED TO ACTIVATE POWERLEVEL10K BY ADDING 'powerlevel10k/powerlevel10k' IN FRONT OF 'ZSH_THEME='
+		echo YOU NEED TO ACTIVATE POWERLEVEL10K BY ADDING 'powerlevel10k/powerlevel10k' IN FRONT OF 'ZSH_THEME=' in .ZSHRC
 		sleep 5
 
 	fi
