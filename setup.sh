@@ -69,7 +69,6 @@ folder_structure
 while true ; do
 	sleep 3
 	clear
-ZSH_THEME="powerlevel9k/powerlevel9k"
 	echo "1.Themes"
 	echo "2.Terminal"
 	echo "3.Software"
