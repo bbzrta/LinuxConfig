@@ -41,7 +41,7 @@ set_terminal () {
 # Installing all the needed packages
 install_packages_arch(){
 	
-	xargs -a software.txt sudo pacman -S 
+	xargs -a Files/Software/pacman.txt sudo pacman -S 
 }
 install_packages_debian(){
 	xargs -a software.txt sudo apt install 
