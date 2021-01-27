@@ -41,7 +41,7 @@ set_terminal () {
 # Installing all the needed packages
 install_packages_arch(){
 	#xargs -a Files/Software/pacman.txt sudo pacman -S
-	for i in `cat Files/Software/pacman.txt` ; do sudo pacman -S  $i --noconfrim; done
+	for i in `cat Files/Software/pacman.txt` ; do sudo pacman -S  $i --noconfirm; done
 }
 install_packages_debian(){
 	#xargs -a software.txt sudo apt install
