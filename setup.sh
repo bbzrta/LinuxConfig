@@ -8,18 +8,18 @@
 
 # Creating the needed folder structure for -per user- configurations.
 folder_structure () {
-	mkdir ~/.fonts ~/.icons ~/.themes ~/temp
-	chmod 777 ~/.fonts ~/.icons ~/.themes
+	mkdir /home/$USER/.fonts /home/$USER/.icons /home/$USER/.themes /home/$USER/temp
+	chmod 777 /home/$USER/.fonts /home/$USER/.icons /home/$USER/.themes
 	clear
 }
 
 # Setting the shell and icon theme in place
 set_themes () {
-	unzip themes.zip -d ~/.themes/
-	wget "https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/master.tar.gz" -P ~/temp/
-	tar -xf ~/temp/master.tar.gz -C ~/temp/
-	mv ./*Papirus* ~/.icons/
-	rm -rf ~/temp/*
+	unzip themes.zip -d /home/$USER/.themes/
+	wget "https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/master.tar.gz" -P /home/$USER/temp/
+	tar -xf /home/$USER/temp/master.tar.gz -C home/$USER/temp/
+	mv ./*Papirus* /home/$USER/.icons/
+	rm -rf /home/$USER/temp/*
 }
 
 # Downloading Alacritty on Arch based systems using pacman.
@@ -63,6 +63,12 @@ echo "3.Fedora"
 echo "What is the OS based on:"; read -r osname
 clear
 folder_structure
+
+if [[ $osname -eq 3 ]]
+then
+	sudo dnf install util-linux-user
+	sudo dnf install zsh
+fi
 
 while true ; do
 	sleep 1
