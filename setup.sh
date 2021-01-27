@@ -40,14 +40,16 @@ set_terminal () {
 
 # Installing all the needed packages
 install_packages_arch(){
-	
-	xargs -a Files/Software/pacman.txt sudo pacman -S 
+	#xargs -a Files/Software/pacman.txt sudo pacman -S
+	for i in `cat Files/Software/pacman.txt` ; do sudo pacman -S  $i --no-confrim; done
 }
 install_packages_debian(){
-	xargs -a software.txt sudo apt install 
+	#xargs -a software.txt sudo apt install
+	for i in `cat Files/Software/apt.txt` ; do sudo apt install  $i -y; done
 }
 install_packages_fedora(){
-	xargs -a software.txt sudo dnf install
+	#xargs -a software.txt sudo dnf install
+	for i in `cat Files/Software/dnf.txt` ; do sudo dnf install  $i -y; done
 }
 
 install_fonts(){
