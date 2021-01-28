@@ -28,6 +28,7 @@ set_themes () {
 
 # Downloading Alacritty on Arch based systems using pacman.
 set_terminal () {
+  sudo "${pkg_manager}" "${pkg_option}" alacritty "$pkg_confirm"
 	mkdir ~/.config/alacritty 
 	cp dotconfig/alacritty.yml ~/.config/alacritty/
 	chsh "$USER" -s /bin/zsh
@@ -35,9 +36,11 @@ set_terminal () {
 	
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
+	/themes/powerlevel10k"
 
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
+	/plugins/zsh-syntax-highlighting"
 
 	cp ./.zshrc ~/
 }
@@ -49,7 +52,6 @@ install_packages(){
 
 install_fonts(){
 	unzip ./Files/fonts.zip -d ~/.fonts/
-
 }
 ##########################################################
 clear
@@ -57,7 +59,9 @@ clear
 echo "1.Arch"
 echo "2.Debian"
 echo "3.Fedora"
-echo "What is the OS based on:"; read -r osname
+echo "4.Custom"
+printf "What is the OS based on:"
+read -r osname
 clear
 folder_structure
 
@@ -76,10 +80,18 @@ elif [[ $osname -eq 3 ]]; then
   pkg_option="install"
   pkg_confirm="-y"
   pkg_list="Files/Software/dnf.txt"
+elif [[ $osname -eq 4 ]]; then
+  printf "Enter your package manager(dnf, pacman, apt etc..): " ;
+   read -r pkg_manager
+  printf "Enter your package manager option used to install(-S in pacman, install in apt etc..): ";
+   read -r pkg_option
+  printf "Enter the Required tag for no confirm installation(optional): ";
+   read -r pkg_confirm
+  printf "Enter the absolute path to your package list: ";
+   read -r pkg_list
 fi
 
 while true ; do
-	sleep 1
 	clear
 	echo "1.Themes"
 	echo "2.Terminal"
@@ -87,8 +99,7 @@ while true ; do
 	echo "4.fonts"
 	echo "0.Quit"
 	echo "9.Quit and reboot."
-	echo "What do you want to start with:"
-	read -r task
+	printf "What do you want to start with: "; read -r task
 
 	if [[ $task -eq 1 ]]; then
 		set_themes
@@ -105,4 +116,5 @@ while true ; do
 		rm -rf ~/temp
 		sudo shutdown -r now
 	fi
+
 done
