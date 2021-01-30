@@ -20,10 +20,7 @@ folder_structure () {
 # Setting the shell and icon theme in place
 set_themes () {
 	unzip ./Files/themes.zip -d /home/"$USER"/.themes/
-	wget "https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/archive/master.tar.gz" -P /home/"$USER"/temp/
-	tar -xf /home/"$USER"/temp/master.tar.gz -C home/"$USER"/temp/
-	mv ./*Papirus* /home/"$USER"/.icons/
-	rm -rf /home/"$USER"/temp/*
+	unzip ./Files/icons.zip -d /home/"$USER"/.icons/
 }
 
 # Downloading Alacritty on Arch based systems using pacman.
@@ -56,11 +53,11 @@ install_fonts(){
 ##########################################################
 clear
 
-echo "1.Arch"
-echo "2.Debian"
-echo "3.Fedora"
+echo "1.Pacman(Arch systems)"
+echo "2.Apt(Debian, ubuntu, pop os..)"
+echo "3.DNF(RHEL, Fedora..)"
 echo "4.Custom"
-printf "What is the OS based on:"
+printf "What package manager do you want to use:"
 read -r osname
 clear
 folder_structure
