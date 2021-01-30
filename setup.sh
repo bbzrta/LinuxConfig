@@ -19,6 +19,7 @@ folder_structure () {
 
 # Setting the shell and icon theme in place
 set_themes () {
+	sudp "${pkg_manager}" "${pkg_option}" gnome-shell-extensions "${pkg_confirm}"
 	unzip ./Files/themes.zip -d /home/"$USER"/.themes/
 	unzip ./Files/icons.zip -d /home/"$USER"/.icons/
 }
