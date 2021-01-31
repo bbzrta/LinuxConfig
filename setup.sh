@@ -26,7 +26,7 @@ set_themes () {
 
 # Downloading Alacritty on Arch based systems using pacman.
 set_terminal () {
-  sudo "${pkg_manager}" "${pkg_option}" alacritty "$pkg_confirm"
+  sudo "${pkg_manager}" "${pkg_option}" alacritty zsh "$pkg_confirm"
 	mkdir ~/.config/alacritty 
 	cp dotconfig/alacritty.yml ~/.config/alacritty/
 	chsh "$USER" -s /bin/zsh
@@ -34,11 +34,9 @@ set_terminal () {
 	
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
-	/themes/powerlevel10k"
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
-	/plugins/zsh-syntax-highlighting"
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 
 	cp ./.zshrc ~/
 }
