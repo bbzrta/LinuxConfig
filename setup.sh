@@ -12,7 +12,7 @@ pkg_list=""
 
 # Creating the needed folder structure for -per user- configurations.
 folder_structure () {
-	mkdir /home/"$USER"/.fonts /home/"$USER"/.icons /home/"$USER"/.themes /home/"$USER"/temp
+	mkdir /home/"$USER"/.fonts /home/"$USER"/.icons /home/"$USER"/.themes
 	chmod 777 /home/"$USER"/.fonts /home/"$USER"/.icons /home/"$USER"/.themes
 	clear
 }
@@ -109,7 +109,6 @@ while true ; do
 		break
 	elif [[ $task -eq 9 ]]; then
 		chmod 755 ~/.fonts ~/.themes ~/.icons ~/.config
-		rm -rf ~/temp
 		sudo shutdown -r now
 	fi
 
